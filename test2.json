@@ -1,0 +1,51 @@
+{
+  "nodes": [
+    {
+      "flags": {
+        "unused": 0,
+        "has_custom_suggestions": 0,
+        "has_redirect_node": 0,
+        "has_command": 0,
+        "command_node_type": 0
+      },
+      "children": [
+        1
+
+      ]
+    },
+    {
+      "flags": {
+        "unused": 0,
+        "has_custom_suggestions": 0,
+        "has_redirect_node": 0,
+        "has_command": 1,
+        "command_node_type": 1
+      },
+      "children": [
+        2
+      ],
+      "extraNodeData": {
+        "name": "anarchy311"
+      }
+    },
+
+    {
+      "flags": {
+        "unused": 0,
+        "has_custom_suggestions": 1,
+        "has_redirect_node": 0,
+        "has_command": 1,
+        "command_node_type": 2
+      },
+      "children": [],
+      "extraNodeData": {
+        "name": "args",
+        "parser": "brigadier:string",
+        "properties": "GREEDY_PHRASE",
+        "suggestionType": "minecraft:ask_server"
+      }
+    }
+
+  ],
+  "rootIndex": 0
+}

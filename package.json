@@ -1,0 +1,16 @@
+{
+  "name": "SmartPaster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true,
+  "dependencies": {
+    "buffer-equal": "^1.0.1",
+    "minecraft-data": "^3.99.1",
+    "minecraft-protocol": "^1.62.0",
+    "prismarine-nbt": "^2.7.0"
+  }
+}
