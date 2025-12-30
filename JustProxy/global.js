@@ -1,6 +1,7 @@
 const mc = require('minecraft-protocol')
 const bufferEqual = require("buffer-equal");
 
+const socks = require("socks").SocksClient
 const states = mc.states
 function printHelpAndExit (exitCode) {
     console.log('usage: node proxy.js [<options>...] <target_srv> <version>')
@@ -93,12 +94,52 @@ srv.on('login', function (client) {
         console.log(err.stack)
         if (!endedTargetClient) { targetClient.end('Error') }
     })
+
+
+    let connect
+
+    const proxyOpt = "45.43.70.207:6494:xyhqvwvm:growthup".split(":");
+
+    connect = async (client) => {
+        console.log('Попытка подключения к прокси...', undefined, "white", "bold");
+        await socks.createConnection({
+            proxy: {
+                host: proxyOpt[0],
+                port: Number(proxyOpt[1]),
+                type: 5,
+                userId: proxyOpt[2],
+                password: proxyOpt[3]
+            },
+            command: 'connect',
+            destination: {
+                host: host,
+                port: 25565
+            },
+        }, (err, info) => {
+            if (err) {
+                console.log("Ошибка подключения к прокси!", undefined, "red", "bold");
+                return;
+            }
+            console.log('Соединение с прокси установлено.', undefined, "white", "bold");
+            client.setSocket(info.socket);
+            client.emit('connect');
+        });
+    };
+
+
+
+
+
+
+
+
     const targetClient = mc.createClient({
         host,
         port,
         username: client.username,
         keepAlive: false,
-        version
+        version,
+        connect
     })
     client.on('packet', function (data, meta) {
         if (targetClient.state === states.PLAY && meta.state === states.PLAY) {
